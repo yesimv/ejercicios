@@ -45,14 +45,25 @@
                     $resultado['atleta']->agregarMedalla("Bronce");
                 }
             }
-            return json_encode($resultadoParticipacion);
+
+            foreach($this->participantes as $participante=>$atleta){
+                echo "Resultado del participante ".$participante+1 ." ". $atleta->getNombre() .": "  . $puntaje ."</br>
+                Medalla obtenida: ".$atleta->getMedallas()."</br>";
+            }
+            //return json_encode($resultadoParticipacion);
 
         }
 
         //obtener raking por pais
         public function ranking(){
             //por cada participante se pedira el dato de medallas ganadas y se ordenaran por las medallas optenidas en orden
-
+            
+            foreach($this->participantes as $participante=>$atleta){
+                
+            
+                echo "</br>Participante " . $participante+1 .": " .$atleta->getNombre() ." tiene ".$atleta->getMedallas() ."medallas.</br>";
+            
+            }
             
 
             
@@ -109,7 +120,5 @@ echo $eventoAtletismo->simularEvento();
 echo $eventoAtletismo->simularEvento();
 echo $eventoAtletismo->simularEvento();
 echo $eventoAtletismo->simularEvento();
-echo $atleta1->getMedallas();
-echo $atleta2->getMedallas();
-echo $atleta3->getMedallas();
+echo $eventoAtletismo->ranking();
 ?>

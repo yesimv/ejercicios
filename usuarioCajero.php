@@ -13,10 +13,15 @@ class usuarioCajero
     }
 
 
-    public function consultarDatos($posicion)
+    public function getNombre()
     {
-        $datos = [$this->nombre, $this->saldo];
-        return $datos[$posicion];
+        
+        return $this->nombre;
+    }
+    public function getSaldo()
+    {
+        
+        return $this->saldo;
     }
 
 
@@ -110,12 +115,12 @@ $usuario = new usuarioCajero("Carlos", 3000);
 
 <body>
     <h2>Cajero</h2>
-    <p>Bienvenido: <?php echo $usuario->consultarDatos(0) ?></p>
+    <p>Bienvenido: <?php echo $usuario->getNombre() ?></p>
 
     <hr>
 
     <h3>Consulta de saldo</h3>
-    <p>Tu saldo actual es de: <?php echo $usuario->consultarDatos(1) ?></p>
+    <p>Tu saldo actual es de: <?php echo $usuario->getSaldo() ?></p>
 
     <hr>
 

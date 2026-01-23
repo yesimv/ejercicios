@@ -1,5 +1,5 @@
 <?php
-echo 'conexion a modelo';
+
 class pendienteM
 {
 
@@ -56,6 +56,15 @@ class pendienteM
         foreach ($this->lista as $index => $elemento) {
             if ($elemento['id'] == $id) {
                 $this->lista[$index]['titulo'] = $nuevoValor;
+                break;
+            } 
+        }
+    }
+    public function editarDescripcion($id, $nuevoValor)
+    {
+        foreach ($this->lista as $index => $elemento) {
+            if ($elemento['id'] == $id) {
+                $this->lista[$index]['descripcion'] = $nuevoValor;
                 return  $this->lista;
             } else {
                 return false;

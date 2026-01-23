@@ -40,8 +40,8 @@
 </head>
 <body>
  
- <h2 class="text-3xl font-bold text-gray-900">List to do</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+ <h2 class="text-3xl font-bold text-gray-900 m-10"><?php  ?></h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-10">
        
         <?php foreach  ($mostrarLista1 as $index => $elemento){
         if($elemento['estaFinalizada']){
@@ -73,7 +73,16 @@
                         
                     </div>
                     <div class="mt-4 flex gap-2">
-                         <a href="?action=delete" class="text-center flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">Eliminar</a>
+                        <?php 
+                        if($user == TRUE){
+
+                           echo '
+                           <form method="post" action="?action=delete&id=';echo $elemento["id"];
+                           echo '">
+                           <button  type="submit" class="text-center flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">Eliminar</button>
+                            </form>';
+                        } ?>
+                         
                          <a href="?action=details&id=<?php echo $elemento['id'] ?>" class="text-center flex-1 text-sm border border-pink-600 text-pink-600 hover:bg-pink-50 px-3 py-2 rounded-md transition"> Ver</a>
                          
                     </div>
@@ -84,8 +93,15 @@
     </div>
 
     <br>
+    <?php 
+    if($user == TRUE){
+        echo '<a href="?action=nuevo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">NUEVO</a>
+    ';
+    }
+    ?>
 
-    <a href="?action=nuevo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">NUEVO</a>
+    <a href="?action=cerrar" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">CERRAR SESION</a>
+    
                         
 
 

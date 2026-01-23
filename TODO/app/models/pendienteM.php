@@ -1,8 +1,7 @@
 <?php
-echo 'conexion a modelo';
+
 class pendienteM
 {
-
     private $lista = [
         [
             'id' => 1,
@@ -25,44 +24,29 @@ class pendienteM
     ];
 
     private $id = 0;
-
-    public function nuevoPendiente($titulo, $descripcion, $estado)
+    public function create($titulo, $descripcion, $estaFinalizada)
     {
-
         $id = $this->id++;
-
         $this->lista[] = [
             'id' => $id + 1,
             'titulo' => $titulo,
             'descripcion' => $descripcion,
-            'estaFinalizada' => $estado
+            'estaFinalizada' => $estaFinalizada
         ];
-
-        return;
     }
-
-    public function mostrarPorId($id)
+    public function getById($id)
     {
-
         foreach ($this->lista as $propiedad) {
-            if ($propiedad['id'] === $id) {
+            if ($propiedad['id'] == $id) {
                 return $propiedad;
             }
         }
-        return null;
     }
-    public function editarTitulo($id, $nuevoValor)
+    public function getAll()
     {
-        foreach ($this->lista as $index => $elemento) {
-            if ($elemento['id'] == $id) {
-                $this->lista[$index]['titulo'] = $nuevoValor;
-                return  $this->lista;
-            } else {
-                return false;
-            }
-        }
+        return $this->lista;
     }
-    public function eliminarPorId($id)
+    public function deleteById($id)
     {
         foreach ($this->lista as $index => $elemento) {
             if ($elemento['id'] == $id) {
@@ -73,8 +57,16 @@ class pendienteM
         }
     }
 
-    public function mostrarPendientes()
+    public function editTitulo($id, $nTitulo)
     {
-        return $this->lista;
+        foreach ($this->lista as $index => $elemento) {
+            if ($elemento['id'] == $id) {
+                $this->lista[$index]['titulo'] = $nTitulo;
+
+                return $this->lista[$index];
+            } else {
+                return FALSE;
+            }
+        }
     }
 }

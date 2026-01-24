@@ -66,7 +66,7 @@
            <?php } ?>
 
     </div>
-    <a href="?action=index" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">REGRESAR</a>
+    <a href="?action=index" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">REGRESAR</a>
 
 </body>
 

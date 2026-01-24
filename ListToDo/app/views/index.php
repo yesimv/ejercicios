@@ -40,7 +40,7 @@
 </head>
 <body>
  
- <h2 class="text-3xl font-bold text-gray-900 m-10"><?php  ?></h2>
+ <h2 class="text-3xl font-bold text-gray-900 m-10"><?php echo $_SESSION['nombre']  ?></h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-10">
        
         <?php foreach  ($mostrarLista1 as $index => $elemento){

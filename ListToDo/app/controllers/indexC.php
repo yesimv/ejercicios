@@ -4,10 +4,9 @@ require_once 'app/models/usuarioM.php';
 
 class indexC
 {
-    private $user;
-    private $admin;
+    
     private $pendienteM;
-    private $sesion;
+    
     public function __construct()
     {
         $this->pendienteM = new pendienteM();
@@ -31,15 +30,15 @@ class indexC
                 $_SESSION['sesion'] = true;
                 
                 $_SESSION['isAdmin'] = $this->isAdmin($userAdmin);
-                $this->admin = true;
-                $nombreCompleto = $this->nombreLogueado($userAdmin);
+                
+                $_SESSION['nombre'] = $this->nombreLogueado($userAdmin);
                 require_once 'app/views/index.php';
             }elseif($username == $userCliente->getUsername() && $password == $userCliente->getPassword()){
                 $_SESSION['sesion'] = true;
-                $this->admin = false;
+                
                 
                 $_SESSION['isAdmin'] = $this->isAdmin($userCliente);
-                $nombreCompleto = $this->nombreLogueado($userCliente);
+                $_SESSION['nombre']  = $this->nombreLogueado($userCliente);
                 require_once 'app/views/index.php';
             }else{
                 echo 'Error de sesion';
@@ -74,11 +73,17 @@ class indexC
     }
     public function mostrarPendiente($id)
     {
-        
-        
-        $id = $id;
+        if(isset($_SESSION['sesion'])&&$_SESSION['sesion']==true){
+            
+           $id = $id;
         $resp = $this->pendienteM->mostrarPorId($id);
         require_once 'app/views/details.php';
+        }else{
+            echo 'sesion fallida';
+            require_once 'app/views/login.php';
+        }
+        
+        
     }
     public function editarTitulo($id, $titulo)
     {
@@ -97,20 +102,36 @@ class indexC
 
     public function create()
     {
+        if(isset($_SESSION['sesion'])&&$_SESSION['sesion']==true){
+            
         require_once 'app/views/create.php';
+        }else{
+            echo 'sesion fallida';
+            require_once 'app/views/login.php';
+        }
+        
     }
     public function ccreacion()
     {
+
+        if(isset($_SESSION['sesion'])&&$_SESSION['sesion']==true){
+            
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
         
         $this->pendienteM->nuevoPendiente($titulo, $descripcion, FALSE);
         $creacion = $this->mostrarLista();
         require_once 'app/views/ccreacion.php';
+        }else{
+            echo 'sesion fallida';
+            require_once 'app/views/login.php';
+        }
+        
     }
     public function cdetails($id)
     {
-        
+        if(isset($_SESSION['sesion'])&&$_SESSION['sesion']==true){
+            
         $id = $id;
         $titulo = $_POST['titulo'];
         $descripcion = $_POST['descripcion'];
@@ -118,15 +139,27 @@ class indexC
         $actualizacion = $this->mostrarLista();
         
         require_once 'app/views/cdetails.php';
+        }else{
+            echo 'sesion fallida';
+            require_once 'app/views/login.php';
+        }
+        
     }
     public function delete($id)
     {
+        if(isset($_SESSION['sesion'])&&$_SESSION['sesion']==true){
+            
         $id = $id;
         
         $eliminarPendiente = $this->eliminarPendiente($id);
         $mostrarLista2 = $this->mostrarLista();
         
         require_once 'app/views/delete.php';
+        }else{
+            echo 'sesion fallida';
+            require_once 'app/views/login.php';
+        }
+        
     }
 
     public function cerrarSesion(){

@@ -11,6 +11,8 @@ $id = $_GET['id']??null;
 switch($ruta){
     case 'login': $index->login();
     break;
+    case 'iniciado': $index->iniciado();
+    break;
     case 'index': $index->index();
     break;
     case 'nuevo': $index->create();

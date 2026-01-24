@@ -7,7 +7,7 @@
 </head>
 <body>
     <div>
-        <form method='post' action="?action=index">
+        <form method='post' action="?action=iniciado">
             <label  >Usuario</label> <input name="username" type="text"   placeholder="username">
             <label  >Contraseña</label> <input name="password" type="password"   placeholder="password">
             <button type="submit"> Login</button>

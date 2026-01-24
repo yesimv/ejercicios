@@ -52,15 +52,15 @@
             <?php echo '<form method="post" action="?action=cdetails&id='.$id.'" class="space-y-4 ">'; ?>
                 <div>
                     <label for="message-subject" class="block text-sm font-medium text-gray-700 mb-1 sr-only">Titulo</label> 
-                    <input  <?php  echo ($user == TRUE) ? '':'disabled'; ?> name="titulo" type="text" name="titulo" id="message-subject" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" value="<?php echo $resp['titulo']; ?>">
+                    <input  <?php  echo ($_SESSION['isAdmin']== true) ? '':'disabled'; ?> name="titulo" type="text" name="titulo" id="message-subject" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" value="<?php echo $resp['titulo']; ?>">
                 </div>
                 <div>
                     <label for="message-body" class="block text-sm font-medium text-gray-700 mb-1 sr-only">Descripcion</label>
-                    <textarea <?php echo ($user == TRUE) ? '':'disabled'; ?> name="descripcion" id="message-body" name="descripcion" rows="5" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" required><?php echo $resp['descripcion']; ?></textarea>
+                    <textarea <?php echo ($_SESSION['isAdmin']== true) ? '':'disabled'; ?> name="descripcion" id="message-body" name="descripcion" rows="5" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" required><?php echo $resp['descripcion']; ?></textarea>
                 </div>
                 <div class="pt-2 flex items center justify-center">
                     <?php 
-                    if($user == true){
+                    if($_SESSION['isAdmin']== true){
                         echo '<button type="submit" class="text-center flex-1 bg-pink-600 hover:bg-pink-700 text-white py-2.5 px-4 rounded-md font-semibold shadow hover:shadow-md transition">Editar</button>';
                     }
                     ?>

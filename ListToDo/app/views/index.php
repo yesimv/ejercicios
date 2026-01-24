@@ -74,7 +74,7 @@
                     </div>
                     <div class="mt-4 flex gap-2">
                         <?php 
-                        if($user == TRUE){
+                        if($_SESSION['isAdmin']== true){
 
                            echo '
                            <form method="post" action="?action=delete&id=';echo $elemento["id"];
@@ -94,7 +94,7 @@
 
     <br>
     <?php 
-    if($user == TRUE){
+    if($_SESSION['isAdmin']){
         echo '<a href="?action=nuevo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">NUEVO</a>
     ';
     }

@@ -1,31 +1,38 @@
 <?php
-//session_destroy();
-session_start();
 
-require_once 'app/controllers/indexC.php';
+require_once 'app/utils/rutas-controllers.php';
+
+auth::sessionIniciada();
+
 $index = new indexC();
+$usuario = new usuarioC();
+$tarea = new tareaC();
 
 $ruta = $_GET['action'] ?? 'login';
 $id = $_GET['id']??null;
 
 switch($ruta){
-    case 'login': $index->login();
+    case 'registro': $index->registro();
     break;
-    case 'iniciado': $index->iniciado();
+    case 'nuevoRegistro': $usuario->nuevoRegistro();
+    break;
+    case 'login': $index->login();
     break;
     case 'index': $index->index();
     break;
     case 'nuevo': $index->create();
     break;
-    case 'ccreacion': $index->ccreacion();
+    case 'ccreacion': $tarea->confirmarCreacionTarea();
     break;
-    case 'details': $index->mostrarPendiente((int)$_GET['id']);
+    case 'details': $tarea->mostrarTarea((int)$_GET['id']);
     break;
-    case 'cdetails': $index->cdetails((int)$_GET['id']);
+    case 'cdetails': $tarea->confirmarDetallesTarea((int)$_GET['id']);
     break;
-    case 'delete': $index->delete((int)$_GET['id']);
+    case 'delete': $tarea->deleteTarea((int)$_GET['id']);
     break;
-    case 'cerrar': $index->cerrarSesion();
+    case 'cambiarE': $tarea->changeEstado((int)$_GET['id']);
+    break;
+    case 'cerrar': auth::closeSession();
     break;
     default : echo "Vista no encontrada";
     break;

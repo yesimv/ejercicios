@@ -49,7 +49,7 @@
                         
                     </div>
                     <div class="mt-4 flex gap-2">
-                        <?php if($_SESSION['isAdmin']== true){
+                        <?php if($_SESSION['sesion']['isAdmin']== true){
 
                            echo '
                            <form method="post" action="?action=delete&id=';echo $elemento["id"];

@@ -1,5 +1,7 @@
 <?php
-
+//echo json_encode($_SESSION['sesion']);
+//echo json_encode($_SESSION['users']);
+//echo idUsuario();
 
 ?>
 
@@ -40,16 +42,23 @@
 </head>
 <body>
  
- <h2 class="text-3xl font-bold text-gray-900 m-10"><?php echo $_SESSION['nombre']  ?></h2>
+ <h2 class="text-3xl font-bold text-gray-900 m-10"><?php echo $resp['nombre']." ".$resp['apellido']; ?></h2>
+ <?php
+ if(isset($mostrarTareas)){
+            ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-10">
-       
-        <?php foreach  ($mostrarLista1 as $index => $elemento){
-        if($elemento['estaFinalizada']){
-            $isEnd = '<button  class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">FINALIZADA</button>
-                         ';
+
+        <?php 
+        foreach  ($mostrarTareas as $index => $elemento){
+            if($elemento['userId']== $resp['userId']){
+        if(!$elemento['estaFinalizada']){
+            $isEnd = '<form method="post" action="?action=cambiarE&id='.$elemento["id"].'">
+                           <button  type="submit" class="text-center flex-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">PENDIENTE</button>
+                    </form>';
         }else{
-            $isEnd = '<button  class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">PENDIENTE</button>
-                         ';
+            $isEnd = '<form method="post" action="?action=cambiarE&id='.$elemento["id"].'">
+                           <button  type="submit" class="text-center flex-1 text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">TERMINADA</button>
+                    </form>';
         }
         ?>
         
@@ -74,13 +83,10 @@
                     </div>
                     <div class="mt-4 flex gap-2">
                         <?php 
-                        if($_SESSION['isAdmin']== true){
+                        if($resp['isAdmin'] == true){
 
                            echo '
-                           <form method="post" action="?action=delete&id=';echo $elemento["id"];
-                           echo '">
-                           <button  type="submit" class="text-center flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">Eliminar</button>
-                            </form>';
+                           <a href="?action=delete&id='.$elemento['id'] .'" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md text-center"> Eliminar</a>';
                         } ?>
                          
                          <a href="?action=details&id=<?php echo $elemento['id'] ?>" class="text-center flex-1 text-sm border border-pink-600 text-pink-600 hover:bg-pink-50 px-3 py-2 rounded-md transition"> Ver</a>
@@ -88,22 +94,75 @@
                     </div>
                 </div>
             </div>
-           <?php } ?>
-
+           <?php } }}
+           
+        else{echo "<p class='m-10'>Todavia no hay tareas guardadas.</p>";
+        }
+    ?>
     </div>
 
     <br>
-    <?php 
-    if($_SESSION['isAdmin']){
-        echo '<a href="?action=nuevo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">NUEVO</a>
-    ';
-    }
-    ?>
+    <a href="?action=nuevo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">NUEVO</a>
+    
+    
 
     <a href="?action=cerrar" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">CERRAR SESION</a>
     
-                        
+    <?php 
+    if($resp['isAdmin'] ==true){
+    echo '<button onclick="abrirModal()" type="button" data-toggle="modal" data-target="#verTodo" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md m-10">Ver Todo</button>';
+    }
+    
+    ?> 
+    <div id="verTodo" aria-hidden="true" tabindex="-1" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-6xl w-full m-10">
+    <button onclick="cerrarModal()" class="mb-4 text-red-600">Cerrar</button>
+        <div  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-10">
+            <?php
+                foreach  ($mostrarTareas as $index => $elemento){
+                        if(!$elemento['estaFinalizada']){
+                            $isEnd = '<form method="post" action="?action=cambiarE&id='.$elemento["id"].'">
+                                           <button  type="submit" class="text-center flex-1 text-sm bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">PENDIENTE</button>
+                                    </form>';
+                        }else{
+                            $isEnd = '<form method="post" action="?action=cambiarE&id='.$elemento["id"].'">
+                                           <button  type="submit" class="text-center flex-1 text-sm bg-green-600 hover:bg-green-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">TERMINADA</button>
+                                    </form>';
+                        }
+                        ?>
 
+                            <div class="profile-card bg-white rounded-lg shadow-md overflow-hidden transition duration-300 flex flex-col">
+
+                                <div class="p-4 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-start mb-1">
+                                             <div>
+                                                <h3 class="text-lg font-semibold text-gray-800"><?php 
+                                                    echo $elemento['titulo'];
+                                                     ?></h3>
+                                                 </br>
+                                                     <?php 
+                                                     echo $isEnd;
+
+                                                  ?>
+                                             </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="mt-4 flex gap-2">
+                                        <a href="?action=delete&id=<?php echo $elemento['id'] ?>" class="text-center flex-1 text-sm border border-pink-600 text-pink-600 hover:bg-pink-50 px-3 py-2 rounded-md transition"> Eliminar</a>
+
+
+                                         <a href="?action=details&id=<?php echo $elemento['id'] ?>" class="text-center flex-1 text-sm border border-pink-600 text-pink-600 hover:bg-pink-50 px-3 py-2 rounded-md transition"> Ver</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                           <?php } ?>
+        </div>  
+        </div>             
+    </div>    
 
 
 
@@ -244,7 +303,7 @@
                  
                 <form class="space-y-4">
                     <div>
-                        <label for="message-subject" class="block text-sm font-medium text-gray-700 mb-1 sr-only">Titulo</label> <input type="text" id="message-subject" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" placeholder="<?php $mostrarPendiente ?>">
+                        <label for="message-subject" class="block text-sm font-medium text-gray-700 mb-1 sr-only">Titulo</label> <input type="text" id="message-subject" class="w-full border-gray-300 rounded-md shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2 border" placeholder="<?php $mostrarTarea ?>">
                     </div>
                     <div>
                         <label for="message-body" class="block text-sm font-medium text-gray-700 mb-1 sr-only">Descripcion</label>
@@ -332,6 +391,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+function abrirModal() {
+  document.getElementById('verTodo').classList.remove('hidden');
+}
+
+function cerrarModal() {
+  document.getElementById('verTodo').classList.add('hidden');
+}
+</script>
 
     <script>
         // Dummy Profile Data (Replace with actual data fetching)

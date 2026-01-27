@@ -1,6 +1,6 @@
 <?php
 
-
+echo 'aqui entro a index';
 ?>
 
 <!DOCTYPE html>

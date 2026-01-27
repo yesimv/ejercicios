@@ -18,7 +18,7 @@
    
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 m-10">
        
-        <?php foreach  ($mostrarLista2 as $index => $elemento){
+        <?php foreach  ($_SESSION['tareas'] as $index => $elemento){
         if($elemento['estaFinalizada']){
             $isEnd = '<button  class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md">FINALIZADA</button>
                          ';
@@ -48,7 +48,7 @@
                         
                     </div>
                     <div class="mt-4 flex gap-2">
-                        <?php if($_SESSION['isAdmin']== true){
+                        <?php if($isAdmin== true){
 
                            echo '
                            <form method="post" action="?action=delete&id=';echo $elemento["id"];

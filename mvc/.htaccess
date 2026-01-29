@@ -1,5 +1,5 @@
 RewriteEngine On
-RewriteBase /prueba/ejercicios/mvc/
+RewriteBase /ejercicios/mvc/
 
-RewriteCond %{REQUEST_URI} !^/prueba/ejercicios/mvc/public/
+RewriteCond %{REQUEST_URI} !^/ejercicios/mvc/public/
 RewriteRule ^(.*)$ public/$1 [L]

@@ -1,3 +1,3 @@
 <?php
 
-define('BASE_URL','/prueba/ejercicios/mvc');
+define('BASE_URL', '/ejercicios/mvc');

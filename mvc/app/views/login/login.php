@@ -1,8 +1,3 @@
-<?php
-
-echo json_encode($_SESSION['sesion']);
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">

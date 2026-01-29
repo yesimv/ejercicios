@@ -26,7 +26,7 @@
             <br>
             
             <button type="submit" class="flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md"> Registrar</button>
-            
+            <a href=<?php echo '"' . BASE_URL . '/login/index"' ?>php class="text-center flex-1 text-sm bg-pink-600 hover:bg-pink-700 text-white px-3 py-2 rounded-md transition shadow hover:shadow-md ">Regresar</a>
 
         </form>
     </div>

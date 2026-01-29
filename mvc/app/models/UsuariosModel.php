@@ -3,7 +3,7 @@
 class UsuariosModel
 {
 
-    private $id;
+    
     public function create($username, $password, $name, $lastName, $email, $isAdmin)
     {
         if (!isset($_SESSION['users'])) {
@@ -12,7 +12,7 @@ class UsuariosModel
         if (!isset($_SESSION['users_id'])) {
             $_SESSION['users_id'] = 1;
         }
-        $this->id++;
+        
         $_SESSION['users'][] = [
             'id' => $_SESSION['users_id'],
             'isActive' => TRUE,
@@ -35,14 +35,17 @@ class UsuariosModel
                     $_SESSION['sesion'] = [];
                 }
 
-                $_SESSION['sesion'][] = [
-                    '$id' => $valor['id'],
+                $_SESSION['sesion'] = [
+                    'id' => $valor['id'],
                     'name' => $valor['name'],
                     'lastName' => $valor['lastName'],
                     'isAdmin' => $valor['isAdmin']
                 ];
             }
         }
+    }
+    public function getSesion(){
+        return $_SESSION['sesion'];
     }
 
 
@@ -59,18 +62,17 @@ class UsuariosModel
             }
         }
     }
+    
     public function editById($id, $username, $password, $name, $lastName, $email, $isAdmin)
     {
         foreach ($_SESSION['users'] as $index => $propiedad) {
             if ($propiedad['id'] == $id) {
-                $_SESSION['users'][$index] = [
-                    'username' => $username,
-                    'password' => $password,
-                    'name' => $name,
-                    'lastName' => $lastName,
-                    'email' => $email,
-                    'isAdmin' => $isAdmin
-                ];
+                $_SESSION['users'][$index]['username'] = $username;
+                $_SESSION['users'][$index]['password'] = $password;
+                $_SESSION['users'][$index]['name'] = $name;
+                $_SESSION['users'][$index]['lastName'] = $lastName;
+                $_SESSION['users'][$index]['email'] = $email;
+                $_SESSION['users'][$index]['isAdmin'] = $isAdmin;
             }
         }
     }
@@ -78,7 +80,10 @@ class UsuariosModel
     {
         foreach ($_SESSION['users'] as $index => $propiedad) {
             if ($propiedad['id'] == $id) {
-                unset($_SESSION['users']['index']);
+                $_SESSION['users'][$index]['isActive'] = !$_SESSION['users'][$index]['isActive'];
+                //unset($_SESSION['users'][$index]);
+                //$_SESSION['users'] = array_values($_SESSION['users']);
+                break;
             }
         }
     }

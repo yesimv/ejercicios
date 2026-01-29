@@ -3,10 +3,13 @@
 class LoginController extends Controllers
 {
     protected $modeloUsuarios;
+    protected $modeloTareas;
     public function __construct()
     {
         $this->model("UsuariosModel");
         $this->modeloUsuarios = new UsuariosModel;
+        $this->model("TareasModel");
+        $this->modeloTareas = new TareasModel;
     }
     public function index()
     {
@@ -18,8 +21,14 @@ class LoginController extends Controllers
     {
 
         $this->modeloUsuarios->setSesion($_POST['username'], $_POST['password']);
+        
         Auth::isAuth();
-        $this->view('index');
+        $datos=[
+            
+            'listaTareas'=>$this->modeloTareas->getAll(),
+            'userSesion'=>$this->modeloUsuarios->getSesion()
+        ];
+        $this->view('tareas/main',$datos);
     }
     public function logOut()
     {

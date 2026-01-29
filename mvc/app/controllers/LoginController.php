@@ -8,9 +8,21 @@ class LoginController extends Controllers
         $this->model("UsuariosModel");
         $this->modeloUsuarios = new UsuariosModel;
     }
-    public function setSesion()
+    public function index()
     {
+        Auth::isAuth();
+        $this->view('home/index');
+    }
+    public function setSesion()
+
+    {
+
         $this->modeloUsuarios->setSesion($_POST['username'], $_POST['password']);
-        $this->view('login/login');
+        Auth::isAuth();
+        $this->view('index');
+    }
+    public function logOut()
+    {
+        Auth::closeSession();
     }
 }

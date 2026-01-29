@@ -45,6 +45,7 @@ class UsuariosModel
         }
     }
 
+
     public function getAll()
     {
         return $_SESSION['users'];

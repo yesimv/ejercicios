@@ -1,6 +1,6 @@
 <?php
-echo $cambio;
-echo json_encode($listaUsuarios);
+
+echo json_encode($_SESSION['sesion']);
 
 ?>
 

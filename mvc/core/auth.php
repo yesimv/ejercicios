@@ -1,6 +1,6 @@
 <?php
 
-class auth
+class Auth
 {
     public static function sessionStart()
     {
@@ -11,12 +11,15 @@ class auth
     public static function isAuth()
     {
         if (!isset($_SESSION['sesion'])) {
-            header("Location: " . BASE_URL . "/login/login");
+            require "../app/views/login/login.php";
+            exit;
+        } else {
+            echo 'sesion iniciada';
         }
     }
     public static function closeSession()
     {
         unset($_SESSION['sesion']);
-        header("Location: " . BASE_URL . "/login/login");
+        require "../app/views/login/login.php";
     }
 }

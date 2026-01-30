@@ -13,7 +13,7 @@
     <div class="bg-stone-100 rounded-lg shadow-xl max-w-lg w-full m-10">
         <div class="p-6">
             <h1 class="text-2xl font-bold text-gray-900 mb-5">Inicio de sesion</h1>
-            <form method='post' action=<?php echo '"' . BASE_URL . '/login/setSesion"' ?>>
+            <form method='post'  action=<?php echo '"' . BASE_URL . '/login/setSesion"' ?>>
                 <label>Usuario</label> <input name="username" type="text" placeholder="username" required class="w-full border-gray-300 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500 p-2 border">
                 <br>
                 <label>Contraseña</label> <input name="password" type="password" placeholder="password" required class="w-full border-gray-300 rounded-md shadow-sm focus:border-red-500 focus:ring-red-500 p-2 border">

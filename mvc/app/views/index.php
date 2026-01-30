@@ -77,13 +77,15 @@
     </nav>
     <?php } ?>
       <!-- CONTENEDOR DINÁMICO -->
-    <main class="container">
-        <?php
-            if (isset($vista)) {
-                include $vista;
-            }
-        ?>
-    </main>
+    <div class="flex justify-center">
+        <main class="container ">
+            <?php
+                if (isset($vista)) {
+                    include $vista;
+                }
+            ?>
+        </main>
+    </div>
 
 
 

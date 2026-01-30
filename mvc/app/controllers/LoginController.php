@@ -20,8 +20,8 @@ class LoginController extends Controllers
 
     {
 
-        $this->modeloUsuarios->setSesion($_POST['username'], $_POST['password']);
-        
+        $sesion= $this->modeloUsuarios->setSesion($_POST['username'], $_POST['password']);
+        echo $sesion;
         Auth::isAuth();
         $datos=[
             

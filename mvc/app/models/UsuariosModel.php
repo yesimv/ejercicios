@@ -43,6 +43,9 @@ class UsuariosModel
                 ];
             }
         }
+        if (!isset($_SESSION['sesion'])){
+            return 'Credenciales no validas, intente otra vez.';
+        }
     }
     public function getSesion(){
         return $_SESSION['sesion'];

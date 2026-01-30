@@ -18,6 +18,7 @@ class TareasController extends Controllers{
             
             'listaTareas'=>$this->modeloTareas->getAll(),
             'userSesion'=>$this->modeloUsuarios->getSesion()
+        
         ];
         $this->view("tareas/main",$data);
     }
